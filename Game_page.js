@@ -1,0 +1,17 @@
+/*******************************************************/
+// Game_page
+/*******************************************************/
+// setup()
+/*******************************************************/
+console.log("running game_page")
+function setup() {
+    console.log("setup"); 
+    new Canvas(1000,1000)
+     sprite = new Sprite();
+     sprite.width = 300;
+     sprite.height = 600;
+     sprite.color = 'white';
+  ///
+  cnv = new Canvas(500, 500);
+  console.log("index.html");
+}
