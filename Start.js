@@ -6,20 +6,22 @@
 console.log("running game_page")
 function setup() {
     console.log("setup"); 
-    new Canvas(1000,1000)
+    new Canvas(500,240)
      sprite = new Sprite();
-     sprite.width = 300;
-     sprite.height = 600;
-     sprite.color = 'white';
+     sprite.width = 150;
+     sprite.height = 150;
+     sprite.color = 'Blue';
   ///
-  cnv = new Canvas(500, 500);
+  floor = new Sprite(250, 200, 500, 40, 'static');
+
   console.log("index.html");
+    console.log("index.js");
 }
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
-  background('navy');
+  background('Pink');
   sprite.x += 5;
 }
 
