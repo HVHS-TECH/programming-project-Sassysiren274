@@ -128,12 +128,6 @@ function draw() {
   if (player.x > lastFloorX - 300) {
     generateFloor();
   }
-
-  // restart if player falls
-  if (player.y > 400) {
-    player.pos = {x: 50, y: 0};
-    player.vel = {x: 0, y: 0};
-  }
 }
 
 function generateFloor() {
@@ -151,13 +145,4 @@ function generateFloor() {
 
     lastFloorX += 100;
   }
-  function setup() {
-  let c = createCanvas(500, 240);
-  c.parent(document.body); // attach canvas to body
-  c.style('display', 'block');
-  c.style('margin', 'auto'); // horizontally center
-  world.gravity.y = 10;
-
-  // rest of your setup...
-}
 }
