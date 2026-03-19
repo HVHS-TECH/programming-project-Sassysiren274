@@ -1,122 +1,84 @@
-// /*******************************************************/
-// // index.js
-// /*******************************************************/
-// // setup()
-// /*******************************************************/
-//  console.log("running index.js")
-//  function setup() {
-// // Now the width and height of the canvas keep changing
-// width = random(300,600);
-// height = random(300,600);
-
-// cnv = new Canvas(width, height);
-// // //
-// //  wallLH  = new Sprite(0, height/2, 8, height, 'k');
-// //   wallLH.color = 'black';
-// //   wallRH  = new Sprite(width, height/2, 8, height, 'k');
-// //   wallRH.color = 'black';
-// //   wallTop = new Sprite(width/2, 0, width, 8, 'k');
-// //   wallTop.color = 'black';
-// //   wallBot = new Sprite(width/2, height, width, 8, 'k');
-// //   wallBot.color = 'black';
-
-// red = new Sprite(10, 5 ,100,100);
-// red.color = 'red';
-
-// green = new Sprite( 90, 20 ,  100,100);
-// green.color = 'green';
-
-// blue = new Sprite( 10, 80,  100,100);
-// blue.color = 'blue';
-
-// yellow = new Sprite( 50, 25 ,  100,100);
-// yellow.color = 'yellow';
-
-// purple = new Sprite( 30, 15,  100,100);
-// purple.color = 'purple';
-//  }
-//  /*******************************************************/
-//  // draw()
-//  /*******************************************************/
-//  function draw() {
-//    background(200)
-
-
-//  }
-/*******************************************************/
-// index.js
 /*******************************************************/
 // setup()
 /*******************************************************/
- console.log("running index.js")
- function setup() {
-     console.log("setup"); 
-     new Canvas(500,240)
-      sprite = new Sprite();
-      sprite.width = 300;
-      sprite.height = 600;
-      sprite.color = 'Red';
-      ///Never ending ground
-    floor = new Sprite(250, 200, 500, 40, 'static');
-  ///
-   cnv = new Canvas(500, 500);
- }
- /*******************************************************/
- // draw()
- /*******************************************************/
- function draw() {
-   background(200)
+    //Never ending ground
+    // floor = new Sprite(250, 200, 500, 40, 'static');
+
+let player;
+let floors = [];
+let lastFloorX = 0;
+let vel = 3
+lastFloor= 250
+
+function setup() {
+  console.log("setup");
+  new Canvas(500, 240);
+  world.gravity.y = 10;
+
+  player = new Sprite(50, 0, 20, 20);
+  player.color = 'blue';
+
+  camera.on();
+//
+  wallLH  = new Sprite(-10, height/2, 20, height*4, 'static');
+  wallLH.color = 'black';
+  wallTop = new Sprite(player.x, -50, 2000, 20, 'static');
+  wallTop.color = 'black';
+
+  // creating starting floor
+  generateFloor();
+}
+//******************************************************
+//draw()
+// *****************************************************/
+function draw() {
    background('navy');
-   sprite.x += 5;
 
+  clear();
+
+  // movement
+  if (kb.pressing('left')) {
+    player.vel.x = -3;
+  } 
+  else if (kb.pressing('right')) {
+    player.vel.x = 3;
+  } 
+  else {
+    player.vel.x = 0;
+  }
+
+  if (kb.pressing('up')) {
+    player.vel.y = -5;
+  }
+
+  if (kb.pressing('down')) {
+    player.vel.y = 5;
+  }
+
+  // camera following player
+  camera.x = player.x;
+
+  // generating more floor when player moves forward
+  if (player.x > lastFloorX - 300) {
+    generateFloor();
+  }
+}
+
+function generateFloor() {
+ 
+  for (let i = 0; i < 5; i++) {
+console.log ("Wheeeee!")
+    // random gaps
+  //  if (random() > 0.3) {
+
+      let floor = new Sprite(lastFloorX + 250, 200, 500, 40, 'static');
+      floor.color = 'green';
+      floors.push(floor);
+   lastFloorX+= 500 + random(300,450)
+
+   // }
+
+   // lastFloorX += 100;
+
+  }
  }
-
-/*******************************************************/
-//  END OF APP
-/*******************************************************/
-// function setup() {
-//     let gameState = "index.html"
-// }
-
-// /******************************************************** 
-// ********************************************************/
-// function draw() {
-//     background(220)
-//     if (gameState === "index.html") {
-//         drawMenu();
-//     } else if (gameState === "Start.js") {
-//         drawGame_page();
-//     } else if (gameState === "End_page.js") {
-//         drawGame_page();
-//     }
-// }
-/*******************************************************/
-// Game_page
-/*******************************************************/
-// setup()
-/*******************************************************/
-// console.log("running game_page")
- function setup() {
-     console.log("setup"); 
-     new Canvas(500,240)
-      sprite = new Sprite();
-      sprite.width = 150;
-      sprite.height = 150;
-      sprite.color = 'Blue';
-   ///
-   floor = new Sprite(250, 200, 500, 40, 'static');
-
-   console.log("index.html");
-     console.log("index.js");
- }
- /*******************************************************/
- // draw()
- /*******************************************************/
- function draw() {
-     background('Pink');
-     sprite.x += 5;
- }
-
-/*******************************************************/
-  END OF APP
-/*******************************************************/
