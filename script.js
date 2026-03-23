@@ -12,10 +12,12 @@ lastFloor= 250
 
 function setup() {
   console.log("setup");
-  new Canvas(500, 240);
+  new Canvas(1250,650);
+  // console.log(625,325);
   world.gravity.y = 10;
 
-  player = new Sprite(50, 0, 20, 20);
+
+  player = new Sprite(60, 0, 30, 30);
   player.color = 'blue';
 
   camera.on();
@@ -24,6 +26,8 @@ function setup() {
   wallLH.color = 'black';
   wallTop = new Sprite(player.x, -50, 2000, 20, 'static');
   wallTop.color = 'black';
+  wallBot = new Sprite(player.x, 630, 3000, 20, 'static');
+  wallBot.color = 'black';
 
   // creating starting floor
   generateFloor();
@@ -32,7 +36,7 @@ function setup() {
 //draw()
 // *****************************************************/
 function draw() {
-   background('navy');
+   background('blue');
 
   clear();
 
@@ -48,11 +52,11 @@ function draw() {
   }
 
   if (kb.pressing('up')) {
-    player.vel.y = -5;
+    player.vel.y = -3;
   }
 
   if (kb.pressing('down')) {
-    player.vel.y = 5;
+    player.vel.y = 3;
   }
 
   // camera following player
