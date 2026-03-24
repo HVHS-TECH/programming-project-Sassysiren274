@@ -9,6 +9,8 @@ let floors = [];
 let lastFloorX = 0;
 let vel = 3
 lastFloor= 250
+let score = 0;
+// let gameOver = false;
 
 function setup() {
   console.log("setup");
@@ -72,8 +74,6 @@ function generateFloor() {
  
   for (let i = 0; i < 5; i++) {
 console.log ("Wheeeee!")
-    // random gaps
-  //  if (random() > 0.3) {
 
       let floor = new Sprite(lastFloorX + 250, 200, 500, 40, 'static');
       floor.color = 'green';
@@ -85,4 +85,18 @@ console.log ("Wheeeee!")
    // lastFloorX += 100;
 
   }
- }
+    // Game Over text
+    fill('red');
+    textSize(40);
+    textAlign(CENTER);
+    text("GAME OVER", width/2, height/2);
+
+    // textSize(20);
+    // text("Final Score: " + score, width/2, height/2 + 40);
+  }
+
+  // Score display (canvas)
+  fill('black');
+  textSize(20);
+  textAlign(LEFT);
+  text("Score: " + score, 20, 30);
