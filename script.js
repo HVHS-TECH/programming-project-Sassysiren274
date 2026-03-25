@@ -8,9 +8,15 @@ let player;
 let floors = [];
 let lastFloorX = 0;
 let vel = 3
+<<<<<<< HEAD
 lastFloor = 250
 let coins = [];
 let score = 0;
+=======
+lastFloor= 250
+let score = 0;
+// let gameOver = false;
+>>>>>>> d3ab97656162eeb6f04b47123e3ae15fa19cf237
 
 function setup() {
   console.log("setup");
@@ -85,15 +91,29 @@ function draw() {
 function generateFloor() {
 
   for (let i = 0; i < 5; i++) {
+<<<<<<< HEAD
     console.log("Wheeeee!")
     // random gaps
     //  if (random() > 0.3) {
+=======
+console.log ("Wheeeee!")
+
+      let floor = new Sprite(lastFloorX + 250, 200, 500, 40, 'static');
+      floor.color = 'green';
+      floors.push(floor);
+   lastFloorX+= 500 + random(300,450)
+
+   // }
+
+   // lastFloorX += 100;
+>>>>>>> d3ab97656162eeb6f04b47123e3ae15fa19cf237
 
     let floor = new Sprite(lastFloorX + 250, 200, 500, 40, 'static');
     floor.color = 'green';
     floors.push(floor);
     lastFloorX += 500 + random(300, 450)
   }
+<<<<<<< HEAD
   //
   for (let i = coins.length - 1; i >= 0; i--) {
     if (player.overlaps(coins[i])) {
@@ -102,3 +122,20 @@ function generateFloor() {
     }
   }
 }
+=======
+    // Game Over text
+    fill('red');
+    textSize(40);
+    textAlign(CENTER);
+    text("GAME OVER", width/2, height/2);
+
+    // textSize(20);
+    // text("Final Score: " + score, width/2, height/2 + 40);
+  }
+
+  // Score display (canvas)
+  fill('black');
+  textSize(20);
+  textAlign(LEFT);
+  text("Score: " + score, 20, 30);
+>>>>>>> d3ab97656162eeb6f04b47123e3ae15fa19cf237
