@@ -61,54 +61,52 @@ function draw() {
   if (kb.pressing('down')) {
     player.vel.y = 3;
   }
-
   // camera following player
   camera.x = player.x;
 
-  // generating more floor when player moves forward
- // console.log(player. 1);
-      score += 1;
-    }
-  }
   //
-  if (random() > 0.4) {
-    let coin = new Sprite(floor.x,- 60, 10, 10); //random(100, 400), random(0, 150), 10, 10);
+  if (random() > 0.97) {
+    let coin = new Sprite(player.x + random(200, 400), random(50, 200), 10, 10);
     coin.color = 'yellow';
-    coin.type = 'coin';x)
- // console.log(lastFloorX - 300)
+    coin.type = 'coin';
+    coins.push(coin);
+  }
+
   if (player.x > lastFloorX - 300) {
-   // console.log("Make new floor")
     generateFloor();
   }
   //
   for (let i = coins.length - 1; i >= 0; i--) {
     if (player.overlaps(coins[i])) {
       coins[i].remove();
-      coins.splice(i,
-    coins.push(coin);
+      coins.splice(i, 1);
+      score += 10;
+    }
   }
   console.log(coins.length)
-  // 
+  //
   textSize(20);
   fill(0);
   text("Score: " + score, 10, 20);
   //
   if (player.y > height + 10) {
-  gameOver = true;
-}
+    gameOver = true;
+  }
   //
   if (gameOver) {
-  textSize(50);
-  fill('red');
-  text("GAME OVER", camera.x - 150, height / 2);
-  return; 
+    textSize(50);
+    fill('red');
+    text("GAME OVER", camera.x - 150, height / 2);
+    return;
+  }
+  //
+  if (player.y > height + 10) {
+    gameOver = true;
+  }
+  if (gameOver && kb.presses('r')) {
+    location.reload();
+  }
 }
-//
-if (gameOver && kb.presses('r')) {
-  location.reload(); 
-}
-}
-
 function generateFloor() {
 
   for (let i = 0; i < 5; i++) {
