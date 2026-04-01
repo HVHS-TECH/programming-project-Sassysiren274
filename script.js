@@ -8,10 +8,12 @@ let vel = 3
 let coins = [];
 let score = 0;
 let gameOver = false;
+let bottomWalls = [];
+let topWalls = [];
 //
 function setup() {
   console.log("setup");
-  new Canvas(1250, 650);
+  new Canvas(1250, 625);
   world.gravity.y = 10;
   //
   player = new Sprite(60, 0, 30, 30);
@@ -28,11 +30,7 @@ function setup() {
   //
   wallLH = new Sprite(-10, height / 2, 20, height * 4, 'static');
   wallLH.color = 'black';
-  wallTop = new Sprite(player.x, -50, 2000, 20, 'static');
-  wallTop.color = 'black';
-  wallBot = new Sprite(player.x, 630, 3000, 20, 'static');
-  wallBot.color = 'black';
-
+  
   // creating starting floor
   generateFloor();
 }
@@ -89,35 +87,65 @@ function draw() {
   fill(0);
   text("Score: " + score, 10, 20);
   //
-  if (player.y > height + 10) {
-    gameOver = true;
-  }
+   if (player.y > height + 10) {
+     gameOver = true;
+   }
   //
   if (gameOver) {
-    textSize(50);
-    fill('red');
-    text("GAME OVER", camera.x - 150, height / 2);
-    return;
-  }
-  //
-  if (player.y > height + 10) {
-    gameOver = true;
-  }
-  if (gameOver && kb.presses('r')) {
+  player.vel.x = 0;
+  player.vel.y = 0;
+
+  textAlign(CENTER, CENTER);
+  textSize(60);
+  fill('red');
+  text("GAME OVER", camera.x, height / 2 - 40);
+
+  textSize(25);
+  fill(0);
+  text("Press R to Restart", camera.x, height / 2 + 20);
+
+  if (kb.presses('r')) {
     location.reload();
   }
+
+  return;
 }
+// player colliding with the bottom wall
+for (let wall of bottomWalls) {
+  if (player.overlaps(wall)) {
+    gameOver = true;
+  }
+}
+// Check collision with top wall
+if (player.y < 0) {
+  gameOver = true;
+}
+  }
+  //
 function generateFloor() {
 
   for (let i = 0; i < 5; i++) {
     console.log("Wheeeee!")
-    // random gaps
-    //  if (random() > 0.3)
 
+//Floor
     let floor = new Sprite(lastFloorX + 250, 200, 500, 40, 'static');
     floor.color = 'green';
     floors.push(floor);
     lastFloorX += 500 + random(300, 450)
     // lastFloorX += 100;
+   
+    //Bottomwall
+    let bottomWall = new Sprite(lastFloorX + 250, height + 20, 500, 40, 'static');
+    bottomWall.color = 'black';
+    bottomWall.type = 'danger'; // label it
+    bottomWalls.push(bottomWall);
+    lastFloorX += 500;
+
+    // TOP WALL (optional infinite too)
+    let topWall = new Sprite(lastFloorX + 250, -50, 500, 40, 'static');
+    topWall.color = 'black';
+    topWall.type = 'danger';
+
   }
-}
+//  lastFloorX += 500 + random(300, 450);
+  }
