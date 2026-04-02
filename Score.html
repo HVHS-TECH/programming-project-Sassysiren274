@@ -16,11 +16,21 @@
 <body class="page-background">
     <header>
         <h1>JUMP UP!!</h1>
-        <h2>Your Total Score</h2>
-        <h3>Your current level</h3>
+     <h2 id="totalScore">Your Total Score</h2> //This allows JavaScript to update this specific element
     </header>
+   <script>
+  // Wait until page loads
+  window.onload = function() {
+
+    // Get score (default to 0 if none)
+    let savedScore = localStorage.getItem("score") || 0;
+
+    // This finds the HTML element with the id ‘totalScore’ and changes its text to the score u got.
+    document.getElementById("totalScore").innerText =
+      "Your Total Score: " + savedScore;
+  };
+</script>
     <div class="container">
-        <h2>High Scores</h2>
         <button onclick="window.location.href='index.html'">Back</button>
     </div>
 </body>

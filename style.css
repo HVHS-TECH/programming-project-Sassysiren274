@@ -1,7 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  display: flex;
-  /* turns the whole page into a container */
+  display: flex; /* turns the whole page into a container */
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -9,12 +8,9 @@ body {
 
   /* Background image fix */
   background-image: url("background-img.png");
-  background-size: cover;
-  /* fills screen */
-  background-position: center;
-  /* centers image */
-  background-repeat: no-repeat;
-  /* no tiling */
+  background-size: cover; /* fills screen */
+  background-position: center; /* centers image */
+  background-repeat: no-repeat; /* no tiling */
 }
 
 /* Press effect */
@@ -28,33 +24,14 @@ canvas {
 }
 
 header {
-  position: absolute;
-  /* This is the magic line! */
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
-  background: transparent;
-  /* Removes the white background */
+  background: transparent; /* Removes the white background */
   text-align: center;
   padding: 20px 0;
-  z-index: 10;
-  /* Keeps the title in front of the game */
-}
-
-header h1 {
-  margin: 0;
-  color: white;
-  /* Change color so you can see it against the sky */
-  font-family: "Rubik Glitch", system-ui;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  /* Adds a shadow for readability */
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  /* Prevents the page from scrolling */
+  z-index: 10; /* Keeps the title in front of the game */
 }
 
 canvas {
@@ -69,11 +46,8 @@ canvas {
   flex-direction: column;
   align-items: center;
   gap: 25px;
-
-  padding: 40px;
-  /* This is the space inside the box */
-  border-radius: 20px;
-  /*This makes the borders curved */
+  padding: 40px; /* This is the space inside the box */
+  border-radius: 20px; /*This makes the borders curved */
 }
 
 /* Title */
@@ -82,8 +56,7 @@ h1 {
   color: #ffffff;
   margin-bottom: 20px;
   text-align: center;
-  font-family: "Rubik Glitch", system-ui;
-  /* a font */
+  font-family: "Rubik Glitch", system-ui; /* a font */
 
   /* glow effect */
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);

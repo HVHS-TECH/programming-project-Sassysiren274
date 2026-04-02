@@ -1,6 +1,7 @@
 /*******************************************************/
 // setup()
 /*******************************************************/
+/* variables */
 let player;
 let floors = [];
 let lastFloorX = 0;
@@ -11,7 +12,7 @@ let gameOver = false;
 let bottomWalls = [];
 let topWalls = [];
 let bg;
-//
+/* Loads the background image */
 function preload() {
   bg = loadImage('Game-background2.png');
 }
@@ -29,8 +30,6 @@ function setup() {
   for (let i = 0; i < 10; i++) {
     let coin = new Sprite(random(100, 400), random(0, 150), 10, 10);
     coin.color = '#ffd700';
-    coin.stroke = '#fff';
-    coin.strokeWeight = 2;
     coin.type = 'coin';
     coins.push(coin);
   }
@@ -45,7 +44,7 @@ function setup() {
 //draw()
 // *****************************************************/
 function draw() {
-  camera.off();                  // Turn off camera for static elements
+  camera.off();                  // Turn off camera for other elements
   image(bg, 0, 0, width, height); // Draw the background
   camera.on();                   // Turn camera back on for moving objects
 
@@ -70,7 +69,7 @@ function draw() {
   // camera following player
   camera.x = player.x;
 
-  //
+  // coins
   if (random() > 0.97) {
     let coin = new Sprite(player.x + random(200, 400), random(50, 200), 10, 10);
     coin.color = 'yellow';
@@ -81,7 +80,7 @@ function draw() {
   if (player.x > lastFloorX - 300) {
     generateFloor();
   }
-  //
+  // player overlapping the coins making coins disapear, increasing score
   for (let i = coins.length - 1; i >= 0; i--) {
     if (player.overlaps(coins[i])) {
       coins[i].remove();
@@ -90,18 +89,40 @@ function draw() {
     }
   }
   console.log(coins.length)
-  //
-  camera.off();
-  textSize(20);
-  fill(0);
-  text("Score: " + score, 10, 20);
-  camera.on();
+ 
+  // Draw score box (green button style)
+push();
 
-  //
+// Position (KEEP SAME POSITION — just adjust if needed)
+let x = camera.x - width/2 + 20;
+let y = 20;
+
+// Button style
+fill(0, 200, 0); // green color
+stroke(0, 150, 0); // darker green border
+strokeWeight(2);
+rect(x, y, 180, 50, 15); // rounded corners
+
+// Text style
+fill(255); // white text
+noStroke();
+textSize(20);
+textAlign(CENTER, CENTER);
+
+// Draw score text
+text("Score: " + score, x + 90, y + 25);
+
+pop();
+
+  // Save score when game ends, even after changing pages.
+if (gameOver) {
+  localStorage.setItem("score", score);
+}
+  // gameover if player hits this specific position
   if (player.y > height + 10) {
     gameOver = true;
   }
-  //
+  // game over!!!
   if (gameOver) {
     player.vel.x = 0;
     player.vel.y = 0;
@@ -121,18 +142,18 @@ function draw() {
 
     return;
   }
-  // player colliding with the bottom wall
+  // player colliding with the bottom walland game being over
   for (let wall of bottomWalls) {
     if (player.overlaps(wall)) {
       gameOver = true;
     }
   }
-  // Check collision with top wall
+  // player collision with top wall, gameover too
   if (player.y < 0) {
     gameOver = true;
   }
 }
-//
+// generate infinity floor and top and bottom walls
 function generateFloor() {
 
   for (let i = 0; i < 5; i++) {
@@ -146,15 +167,15 @@ function generateFloor() {
     //Bottomwall
     let bottomWall = new Sprite(lastFloorX + 250, height + 20, 500, 40, 'static');
     bottomWall.color = '#2c7a0b';
-    bottomWall.type = 'danger';
+    //bottomWall.type = 'danger';
     bottomWalls.push(bottomWall);
 
-    // TOP WALL (optional infinite too)
+    // TOP WALL (infinite too)
     let topWall = new Sprite(lastFloorX + 250, -50, 500, 40, 'static');
     topWall.color = 'black';
     topWall.type = 'danger';
     topWalls.push(topWall);
-
+5
   }
   lastFloorX += 500 + random(300, 450);
 }
